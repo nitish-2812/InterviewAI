@@ -8,12 +8,13 @@ nltk.download("stopwords", quiet=True)
 nltk.download("wordnet", quiet=True)
 nltk.download("punkt", quiet=True)
 nltk.download("punkt_tab", quiet=True)
+nltk.download("vader_lexicon", quiet=True)
 
 from nltk.corpus import stopwords
 from nltk.stem import WordNetLemmatizer
 from nltk.tokenize import word_tokenize, sent_tokenize
 from sentence_transformers import SentenceTransformer, util
-from transformers import pipeline
+from nltk.sentiment.vader import SentimentIntensityAnalyzer
 from pydub import AudioSegment
 import speech_recognition as sr
 
@@ -25,10 +26,7 @@ _sbert_local = os.path.join(BASE_DIR, "sbert_model")
 sbert_model = SentenceTransformer(_sbert_local if os.path.isdir(_sbert_local) else "all-MiniLM-L6-v2")
 
 print("Loading sentiment model...")
-sentiment_pipeline = pipeline(
-    "sentiment-analysis",
-    model="distilbert-base-uncased-finetuned-sst-2-english"
-)
+sentiment_analyzer = SentimentIntensityAnalyzer()
 
 with open(os.path.join(BASE_DIR, "question_bank.json")) as f:
     QUESTION_BANK = json.load(f)
@@ -72,10 +70,18 @@ def get_semantic_score(question, answer):
     return max(0.0, min(1.0, util.cos_sim(q_emb, a_emb).item()))
 
 def get_sentiment_score(answer):
-    result     = sentiment_pipeline(answer[:512])[0]
-    label      = result["label"]
-    confidence = result["score"]
-    score      = confidence if label == "POSITIVE" else 1 - confidence
+    scores = sentiment_analyzer.polarity_scores(answer)
+    compound = scores['compound']
+    
+    if compound >= 0.05:
+        label = "POSITIVE"
+    elif compound <= -0.05:
+        label = "NEGATIVE"
+    else:
+        label = "NEUTRAL"
+        
+    confidence = (compound + 1) / 2
+    score = confidence
     return score, label, confidence
 
 def get_keyword_score(answer, expected_keywords):
