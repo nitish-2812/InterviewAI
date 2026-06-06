@@ -19,13 +19,19 @@ import analyzer
 app = FastAPI(title="InterviewAI Backend", version="1.0.0")
 
 # ── CORS ──────────────────────────────────────────────────────────────────────
+# Build allowed origins list (localhost + deployed frontend)
+_origins = [
+    "http://localhost:5173",
+    "http://localhost:5174",
+    "http://127.0.0.1:5173",
+]
+_frontend_url = os.environ.get("FRONTEND_URL", "")
+if _frontend_url:
+    _origins.append(_frontend_url)
+
 app.add_middleware(
     CORSMiddleware,
-    allow_origins=[
-        "http://localhost:5173",
-        "http://localhost:5174",
-        "http://127.0.0.1:5173",
-    ],
+    allow_origins=_origins,
     allow_credentials=True,
     allow_methods=["*"],
     allow_headers=["*"],
