@@ -1,3 +1,13 @@
+---
+title: InterviewAI Backend
+emoji: 🎯
+colorFrom: purple
+colorTo: blue
+sdk: docker
+app_port: 7860
+pinned: false
+---
+
 # InterviewAI – AI-Powered Mock Interview Platform
 
 InterviewAI is a full-stack, AI-driven mock interview application designed to help users practice for job interviews. The platform evaluates user responses in real-time across multiple NLP-based metrics, providing instant, data-driven feedback and scores to help candidates improve their communication and technical skills.
