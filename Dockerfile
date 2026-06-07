@@ -15,8 +15,6 @@ RUN apt-get update && apt-get install -y \
 COPY backend/requirements.txt /app/
 
 # Install Python dependencies
-# We install torch CPU only to save space and time since Spaces uses CPU by default
-RUN pip install --no-cache-dir torch --index-url https://download.pytorch.org/whl/cpu
 RUN pip install --no-cache-dir -r requirements.txt
 
 # Copy the rest of the application
