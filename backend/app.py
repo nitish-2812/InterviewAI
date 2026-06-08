@@ -24,7 +24,10 @@ _origins = [
     "http://localhost:5173",
     "http://localhost:5174",
     "http://127.0.0.1:5173",
+    # Production frontend (Vercel)
+    "https://interview-ai-eight-rho.vercel.app",
 ]
+# Also allow any additional URL set via environment variable (optional override)
 _frontend_url = os.environ.get("FRONTEND_URL", "")
 if _frontend_url:
     _origins.append(_frontend_url)
