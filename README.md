@@ -8,170 +8,153 @@ app_port: 7860
 pinned: false
 ---
 
-# InterviewAI – AI-Powered Mock Interview Platform
+<div align="center">
 
-InterviewAI is a full-stack, AI-driven mock interview application designed to help users practice for job interviews. The platform evaluates user responses in real-time across multiple NLP-based metrics, providing instant, data-driven feedback and scores to help candidates improve their communication and technical skills.
+# 🎯 InterviewAI
 
----
+### AI-Powered Mock Interview Platform
 
-## 🔗 Live Demo
+*Practice interviews with real-time NLP feedback on relevance, sentiment, keywords, and delivery*
 
-| | Link |
-|---|---|
-| 🌐 **Frontend (Live App)** | [interview-ai-eight-rho.vercel.app](https://interview-ai-eight-rho.vercel.app) |
-| ⚙️ **Backend API** | [nitish2812-interviewai-backend.hf.space](https://nitish2812-interviewai-backend.hf.space) |
-| 🤗 **HF Space** | [huggingface.co/spaces/Nitish2812/interviewai-backend](https://huggingface.co/spaces/Nitish2812/interviewai-backend) |
+[![Live Demo](https://img.shields.io/badge/Live%20Demo-interview--ai--eight--rho.vercel.app-6366f1?style=for-the-badge&logo=vercel&logoColor=white)](https://interview-ai-eight-rho.vercel.app)
+[![Backend API](https://img.shields.io/badge/Backend%20API-HuggingFace%20Spaces-FFD21E?style=for-the-badge&logo=huggingface&logoColor=black)](https://huggingface.co/spaces/Nitish2812/interviewai-backend)
+[![GitHub](https://img.shields.io/badge/GitHub-nitish--2812-181717?style=for-the-badge&logo=github)](https://github.com/nitish-2812/InterviewAI)
 
----
+![React](https://img.shields.io/badge/React_18-20232A?style=flat-square&logo=react&logoColor=61DAFB)
+![TypeScript](https://img.shields.io/badge/TypeScript-007ACC?style=flat-square&logo=typescript&logoColor=white)
+![FastAPI](https://img.shields.io/badge/FastAPI-009688?style=flat-square&logo=fastapi&logoColor=white)
+![Python](https://img.shields.io/badge/Python_3.10-3776AB?style=flat-square&logo=python&logoColor=white)
+![Docker](https://img.shields.io/badge/Docker-2CA5E0?style=flat-square&logo=docker&logoColor=white)
+![Supabase](https://img.shields.io/badge/Supabase-3ECF8E?style=flat-square&logo=supabase&logoColor=white)
 
-## 🚀 Complete Project Workflow
-
-1. **Authentication:** Users sign up or log in securely using Supabase Authentication.
-2. **Select a Track:** Users are presented with a personalized dashboard where they can choose from 5 distinct interview tracks (e.g., Software Engineering Basics, HR & Culture Fit, Data Science).
-3. **Live Interview Session:**
-   - The app fetches curated questions from the FastAPI backend based on the selected track.
-   - Users can answer questions by **typing text** or using **voice input** (which is transcribed to text via Google Speech Recognition).
-4. **AI Evaluation (NLP Pipeline):** Once submitted, the backend analyzes the answers across 4 key dimensions:
-   - **Semantic Relevance:** Uses `SBERT (all-MiniLM-L6-v2)` to compute cosine similarity between the question and answer embeddings.
-   - **Sentiment & Confidence:** Uses HuggingFace's `DistilBERT (finetuned-sst-2)` to ensure the candidate's tone is positive and confident.
-   - **Keyword Match:** Uses `NLTK` (lemmatization + tokenization) to check if essential technical jargon was used.
-   - **Clarity & Delivery:** Evaluates sentence length, filler words ("um", "uh"), and speaking pace in WPM (if audio was used).
-5. **Results Dashboard:** Users receive an aggregated overall score on a circular gauge, along with individual metric breakdowns and targeted, actionable feedback.
+</div>
 
 ---
 
-## 💻 Tech Stack
+## Overview
 
-### Frontend
-![React](https://img.shields.io/badge/React_18-20232A?style=flat&logo=react&logoColor=61DAFB)
-![TypeScript](https://img.shields.io/badge/TypeScript-007ACC?style=flat&logo=typescript&logoColor=white)
-![Vite](https://img.shields.io/badge/Vite-B73BFE?style=flat&logo=vite&logoColor=FFD62E)
-![TailwindCSS](https://img.shields.io/badge/Tailwind_CSS-38B2AC?style=flat&logo=tailwind-css&logoColor=white)
-![Vercel](https://img.shields.io/badge/Vercel-000000?style=flat&logo=vercel&logoColor=white)
+InterviewAI is a full-stack application that simulates real job interviews and evaluates your answers using a custom NLP pipeline — no GPT, no paid APIs. All models run locally inside a Docker container on Hugging Face Spaces.
 
-* **Framework:** React 18 with TypeScript & Vite
-* **Styling:** Tailwind CSS (Glassmorphism design)
-* **Routing:** React Router v6
-* **State & Data Fetching:** React Context API, Axios
-* **Deployment:** Vercel
-
-### Backend & AI Engine
-![Python](https://img.shields.io/badge/Python_3.10-3776AB?style=flat&logo=python&logoColor=white)
-![FastAPI](https://img.shields.io/badge/FastAPI-009688?style=flat&logo=fastapi&logoColor=white)
-![Docker](https://img.shields.io/badge/Docker-2CA5E0?style=flat&logo=docker&logoColor=white)
-![HuggingFace](https://img.shields.io/badge/HuggingFace-FFD21E?style=flat&logo=huggingface&logoColor=black)
-
-* **Framework:** FastAPI (Python 3.10+)
-* **Server:** Uvicorn (ASGI)
-* **Semantic Similarity:** `sentence-transformers` — `all-MiniLM-L6-v2` (SBERT)
-* **Sentiment Analysis:** `transformers` — `distilbert-base-uncased-finetuned-sst-2-english`
-* **NLP Processing:** NLTK (lemmatization, tokenization, stopword removal)
-* **Audio Processing:** `SpeechRecognition` (Google API), `pydub`, `ffmpeg`
-* **Containerization:** Docker
-* **Deployment:** Hugging Face Spaces
-
-### Database & Auth
-![Supabase](https://img.shields.io/badge/Supabase-3ECF8E?style=flat&logo=supabase&logoColor=white)
-![PostgreSQL](https://img.shields.io/badge/PostgreSQL-316192?style=flat&logo=postgresql&logoColor=white)
-
-* **Infrastructure:** Supabase
-* **Database:** PostgreSQL (with Row-Level Security)
-* **Auth:** Supabase Authentication (email/password)
+Users can answer questions by **typing** or using **voice input**, and receive instant scoring across 4 dimensions with targeted feedback to improve.
 
 ---
 
-## 🏗️ Deployment Architecture
+## Features
+
+- 🎤 **Voice + Text Input** — Answer by speaking or typing; audio is transcribed via Google Speech Recognition
+- 🧠 **4-Metric NLP Scoring** — Semantic relevance, sentiment confidence, keyword match, and clarity
+- 📊 **Real-Time Feedback** — Circular score gauge + per-metric breakdown + actionable suggestions
+- 🗂️ **5 Interview Tracks** — Software Engineering, Data Science, HR, System Design, and more
+- 🔐 **Auth + History** — Supabase authentication with PostgreSQL session history
+- 🚀 **Fully Deployed** — Docker backend on HF Spaces, React frontend on Vercel
+
+---
+
+## NLP Pipeline
+
+Each answer is scored using a weighted combination of 4 models:
+
+| Metric | Model | What it measures |
+|--------|-------|-----------------|
+| **Semantic Relevance** | `SBERT all-MiniLM-L6-v2` | Cosine similarity between question & answer embeddings |
+| **Sentiment & Confidence** | `DistilBERT finetuned-sst-2` | Positive/confident tone detection |
+| **Keyword Match** | `NLTK` (lemmatizer + tokenizer) | Domain-specific technical vocabulary coverage |
+| **Clarity & Delivery** | Custom heuristics + `pydub` | Sentence structure, filler words, speaking pace (WPM) |
+
+> All models are **open-source and free** — downloaded once and baked into the Docker image at build time. No API keys, no per-request billing.
+
+---
+
+## Architecture
 
 ```
-User Browser
-     │
-     ▼
-┌─────────────────────┐        ┌──────────────────────────────────┐
-│  Vercel (Frontend)  │──API──▶│  Hugging Face Spaces (Backend)   │
-│  React + TypeScript │        │  FastAPI + Docker Container       │
-│  interview-ai-      │        │  SBERT + DistilBERT + NLTK        │
-│  eight-rho.vercel   │        │  nitish2812-interviewai-          │
-│  .app               │        │  backend.hf.space                 │
-└─────────────────────┘        └──────────────────────────────────┘
-           │                                    │
-           ▼                                    ▼
-┌─────────────────────┐              Pre-loaded ML Models
-│  Supabase           │              (baked into Docker image)
-│  Auth + PostgreSQL  │
-└─────────────────────┘
+┌──────────────────────┐         ┌────────────────────────────────┐
+│   Vercel (Frontend)  │──HTTPS─▶│  Hugging Face Spaces (Backend) │
+│   React + TypeScript │         │  FastAPI · Docker · Python 3.10 │
+│   Tailwind CSS       │         │  SBERT · DistilBERT · NLTK      │
+└──────────────────────┘         └────────────────────────────────┘
+          │                                      │
+          ▼                                      ▼
+┌──────────────────────┐           Pre-loaded ML Models
+│  Supabase            │           (baked into image at build time)
+│  Auth · PostgreSQL   │
+└──────────────────────┘
 ```
 
 ---
 
-## ⚙️ Local Setup & Prerequisites
+## Tech Stack
 
-1. **Python 3.10+** & **Node.js 18+** must be installed.
-2. **SBERT Model Extraction:**
-   **⚠️ CRITICAL:** Unzip `sbert_model.zip` into a folder named `sbert_model/` in the project root before running the backend.
-3. **Environment Variables:**
-   Create `frontend/.env` with:
-   ```env
-   VITE_SUPABASE_URL=your_supabase_url
-   VITE_SUPABASE_ANON_KEY=your_supabase_anon_key
-   VITE_API_URL=http://localhost:8000
-   ```
+| Layer | Technology |
+|-------|-----------|
+| **Frontend** | React 18, TypeScript, Vite, Tailwind CSS, Axios |
+| **Backend** | FastAPI, Uvicorn, Python 3.10 |
+| **NLP / AI** | Sentence-Transformers (SBERT), HuggingFace Transformers (DistilBERT), NLTK |
+| **Audio** | SpeechRecognition (Google API), pydub, ffmpeg |
+| **Database & Auth** | Supabase, PostgreSQL (Row-Level Security) |
+| **DevOps** | Docker, Hugging Face Spaces, Vercel |
 
 ---
 
-## 🏃‍♂️ How to Run Locally
+## Local Setup
 
-### 1. Start the Python Backend
+### Prerequisites
+- Python 3.10+ and Node.js 18+
+- Unzip `sbert_model.zip` → `sbert_model/` in the project root (**required**)
+
+### 1. Backend
 ```bash
-# From project root
 pip install -r backend/requirements.txt
 uvicorn backend.app:app --reload --port 8000
 ```
-*Backend API runs at **http://localhost:8000***
 
-### 2. Start the React Frontend
+### 2. Frontend
 ```bash
 cd frontend
 npm install
 npm run dev
 ```
-*Frontend runs at **http://localhost:5173***
+
+Create `frontend/.env`:
+```env
+VITE_SUPABASE_URL=your_supabase_url
+VITE_SUPABASE_ANON_KEY=your_supabase_anon_key
+VITE_API_URL=http://localhost:8000
+```
 
 ---
 
-## 🔗 API Endpoints
+## API Reference
 
 | Method | Endpoint | Description |
 |--------|----------|-------------|
-| `GET`  | `/` | Health check |
-| `GET`  | `/questions` | Fetch questions (`?category=Technical&count=7`) |
-| `POST` | `/analyze` | Analyze a single Q&A pair |
-| `POST` | `/analyze-session` | Batch analyze a full interview session |
+| `GET` | `/` | Health check |
+| `GET` | `/questions?category=Technical&count=7` | Fetch interview questions |
+| `POST` | `/analyze` | Score a single answer |
+| `POST` | `/analyze-session` | Batch score a full interview session |
 
 ---
 
-## 📁 Project Structure
+## Project Structure
 
 ```
-nlp(project)/
 ├── backend/
-│   ├── app.py              # FastAPI server & API endpoints
-│   └── requirements.txt    # Python dependencies
-├── analyzer.py             # Core NLP analysis engine
-├── question_bank.json      # 750+ curated interview questions
-├── sbert_model/            # Local SBERT model weights
-├── weights.pkl             # Scoring weights (text vs audio)
-├── Dockerfile              # Docker config for HF Spaces deployment
-├── frontend/
-│   ├── src/
-│   │   └── services/api.ts # Axios API client
-│   └── .env                # Environment variables
-└── README.md
+│   ├── app.py              # FastAPI routes & middleware
+│   └── requirements.txt
+├── analyzer.py             # Core NLP scoring engine
+├── question_bank.json      # 250+ curated interview questions
+├── sbert_model/            # Local SBERT weights (unzip from .zip)
+├── weights.pkl             # Scoring weights for text vs audio modes
+├── Dockerfile              # Docker build for HF Spaces
+└── frontend/
+    ├── src/services/api.ts # Typed Axios API client
+    └── .env                # Environment variables
 ```
 
 ---
 
-## 👨‍💻 Author
+<div align="center">
 
-**Repalle Sai Nitish**
-[![GitHub](https://img.shields.io/badge/GitHub-nitish--2812-181717?style=flat&logo=github)](https://github.com/nitish-2812)
-[![LinkedIn](https://img.shields.io/badge/LinkedIn-nitish--2812-0077B5?style=flat&logo=linkedin)](https://linkedin.com/in/nitish-2812)
+Made by **Repalle Sai Nitish** · [GitHub](https://github.com/nitish-2812) · [LinkedIn](https://linkedin.com/in/nitish-2812)
+
+</div>
